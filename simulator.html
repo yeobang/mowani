@@ -3,79 +3,85 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Glass Customizer Demo</title>
+    <title>MOWANI — Customize</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;1,300&family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <main class="simulator-page">
-        <section class="product-preview" aria-label="상품 미리보기">
-            <div class="preview-sticky">
-                <p class="eyebrow">Handcrafted Glass Studio</p>
-                <h1>Layered Glass Customizer</h1>
-                <div class="preview-stage" id="previewStage">
-                    <img class="glass-layer glass-body" src="assets/glass-body.png" alt="유리잔 본체">
-                    <img class="glass-layer glass-handle" id="handleImage" src="assets/handle-pink.png" alt="선택된 손잡이 옵션">
+
+<header class="sim-header">
+    <a class="sim-logo" href="/">MOWANI</a>
+    <span class="sim-badge">Customizer</span>
+</header>
+
+<main class="sim-layout">
+
+    <!-- ─ Left: Full-height product gallery ─ -->
+    <section class="sim-gallery" aria-label="상품 미리보기">
+        <div class="sim-stage" id="previewStage">
+            <img class="glass-layer glass-body" src="assets/glass-body.png" alt="유리잔 본체">
+            <img class="glass-layer glass-handle" id="handleImage" src="assets/handle-pink.png" alt="선택된 손잡이">
+        </div>
+        <p class="sim-gallery-label" id="previewLabel">Pink Handle</p>
+    </section>
+
+    <!-- ─ Right: Options panel ─ -->
+    <aside class="sim-panel" aria-label="옵션 선택">
+        <div class="sim-panel-body">
+
+            <header class="sim-panel-header">
+                <p class="sim-eyebrow">Handcrafted Glassware</p>
+                <h1 class="sim-title">Create<br>your piece</h1>
+                <p class="sim-sub">유리잔 본체는 고정이며, 핸들 색상만 변경됩니다.</p>
+            </header>
+
+            <div class="sim-section">
+                <div class="sim-section-head">
+                    <span class="sim-section-label">Handle</span>
+                    <span class="sim-section-value" id="selectedLabel">Pink Handle</span>
                 </div>
-            </div>
-        </section>
-
-        <aside class="customizer-panel" aria-label="옵션 선택">
-            <div class="panel-header">
-                <p class="eyebrow">Made to Order</p>
-                <h2>하단 손잡이/받침 선택</h2>
-                <p class="panel-copy">유리잔 본체는 고정 레이어로 유지되고, 선택한 하단 옵션만 교체됩니다.</p>
+                <div class="sim-swatches" id="optionList" role="listbox" aria-label="핸들 색상"></div>
             </div>
 
-            <div class="option-group">
-                <div class="section-title">
-                    <span>Handle Finish</span>
-                    <strong id="selectedLabel">Pink Handle</strong>
+            <div class="sim-rule"></div>
+
+            <div class="sim-summary">
+                <p class="sim-summary-eyebrow">Your Selection</p>
+                <p class="sim-summary-name" id="summaryLabel">Pink Handle</p>
+                <p class="sim-summary-price">₩ 38,000</p>
+            </div>
+
+            <div class="sim-actions">
+                <button class="sim-btn sim-btn--fill" type="button">Add to Cart</button>
+                <button class="sim-btn sim-btn--outline" type="button">바로 구매</button>
+            </div>
+
+            <details class="sim-dev">
+                <summary>
+                    <span>Alignment</span>
+                    <span class="sim-dev-tag">dev</span>
+                    <span class="sim-dev-arrow">›</span>
+                </summary>
+                <div class="sim-dev-body">
+                    <dl class="sim-metrics">
+                        <div><dt>top</dt><dd id="metricTop">0px</dd></div>
+                        <div><dt>left</dt><dd id="metricLeft">0px</dd></div>
+                        <div><dt>width</dt><dd id="metricWidth">0px</dd></div>
+                    </dl>
+                    <p class="sim-hint">방향키 1px &nbsp;·&nbsp; Shift 10px &nbsp;·&nbsp; [ / ] 너비</p>
+                    <p class="sim-hint" id="summaryPath">assets/handle-pink.png</p>
+                    <button class="sim-copy-btn" id="copyConfigButton" type="button">Config 복사</button>
+                    <p class="sim-hint" id="copyStatus" aria-live="polite"></p>
                 </div>
-                <div class="option-list" id="optionList" role="listbox" aria-label="손잡이 옵션"></div>
-            </div>
+            </details>
 
-            <div class="summary-box">
-                <div>
-                    <span>선택 옵션</span>
-                    <strong id="summaryLabel">Pink Handle</strong>
-                </div>
-                <div>
-                    <span>레이어 이미지</span>
-                    <strong id="summaryPath">assets/handle-pink.png</strong>
-                </div>
-            </div>
+        </div>
+    </aside>
 
-            <div class="dev-tools" aria-label="개발용 위치 조정 도구">
-                <div class="section-title">
-                    <span>Alignment Tools</span>
-                    <strong>Dev</strong>
-                </div>
-                <dl class="metrics">
-                    <div>
-                        <dt>top</dt>
-                        <dd id="metricTop">0px</dd>
-                    </div>
-                    <div>
-                        <dt>left</dt>
-                        <dd id="metricLeft">0px</dd>
-                    </div>
-                    <div>
-                        <dt>width</dt>
-                        <dd id="metricWidth">0px</dd>
-                    </div>
-                </dl>
-                <p class="hint">방향키 1px, Shift + 방향키 10px, [ / ] 너비 조정</p>
-                <button class="copy-button" id="copyConfigButton" type="button">Config 복사</button>
-                <p class="copy-status" id="copyStatus" aria-live="polite"></p>
-            </div>
+</main>
 
-            <div class="purchase-actions">
-                <button class="secondary-button" type="button">장바구니</button>
-                <button class="primary-button" type="button">바로 구매</button>
-            </div>
-        </aside>
-    </main>
-
-    <script src="js/simulator.js"></script>
+<script src="js/simulator.js"></script>
 </body>
 </html>

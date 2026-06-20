@@ -1,6 +1,32 @@
 <!--@layout(/layout/basic/layout.html)-->
 <!--@js(/layout/basic/js/main.js)-->
 <!--@css(/layout/basic/css/main.css)-->
+
+<!-- =============================================
+  MOWANI 히어로 배너 — Fullbleed
+  [Cafe24 배포 전 체크리스트]
+  1. main.css .hero_mowani background-image 경로를 업로드된 실제 경로로 교체
+     예: url('/SkinImg/img/hero_bg.jpg') 또는 url('/web/upload/NNE/hero_bg.jpg')
+  2. img src → /SkinImg/img/mowani_logo-removebg-preview.png 으로 교체
+============================================= -->
+<section class="hero_mowani" id="heroMowani">
+  <div class="hero_sign_wrap">
+    <div class="hero_sign_hanger">
+      <div class="hero_rope"></div>
+      <div class="hero_sign_logo">
+        <!-- Cafe24 배포 시: /SkinImg/img/mowani_logo-removebg-preview.png -->
+        <img src="/assets/mowani_logo-removebg-preview.png" alt="MOWANI">
+      </div>
+    </div>
+  </div>
+  <div class="hero_copy">
+    <span class="hero_eyebrow">Handcrafted Glassware</span>
+    <p class="hero_headline">Daily Light.</p>
+    <p class="hero_sub">일상을 담는 유리</p>
+    <a href="/" class="hero_cta_btn">SHOP NOW</a>
+  </div>
+</section>
+
 <!--@import(/smart-banner/shop1/smart-banner-admin-RES00003.html)-->
 <section class="section main_image_text_gallery" data-ez-module="image-gallery/2" data-ez-role="style.background" data-ez-item-length="3" data-ez="contents-12yzxc0-1">
 	<ez-prop data-version="1.0.0" type="layout">

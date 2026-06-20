@@ -8,15 +8,16 @@
 .xans-smart-banner-admin {margin:0 auto 120px;}
 
 /* 메인 타이틀 */
-.main_title {margin-bottom:50px;}
-.main_title .main_title_txt01 {position:relative;margin:0;padding-top:20px;font-size:30px;font-weight:500;line-height:1;color:#000;letter-spacing:-0.001em;}
-.main_title .main_title_txt01:after {content:"";position:absolute;top:0;left:0;width:20px;height:2px;background:#d0ac88;}
-.main_title .main_title_txt02 {font-size:14px;font-weight:300;line-height:1;color:#888;margin-top:12px;}
+.main_title {margin-bottom:48px;}
+.main_title .main_title_txt01 {position:relative;margin:0;padding:0;font-family:'Jost',sans-serif;font-size:28px;font-weight:300;line-height:1;color:#1A1410;letter-spacing:0.04em;}
+.main_title .main_title_txt01:before {content:"";display:block;width:24px;height:1px;background:#d0ac88;margin-bottom:16px;}
+.main_title .main_title_txt01:after {display:none;}
+.main_title .main_title_txt02 {font-size:13px;font-weight:300;line-height:1;color:#9A8D80;margin-top:10px;letter-spacing:0.05em;}
 .main_title.ez-align-left {text-align:left;}
 .main_title.ez-align-center {text-align:center;}
-.main_title.ez-align-center .main_title_txt01:after {left:0;right:0;margin:0 auto;}
+.main_title.ez-align-center .main_title_txt01:before {margin-left:auto;margin-right:auto;}
 .main_title.ez-align-right {text-align:right;}
-.main_title.ez-align-right .main_title_txt01:after {left:auto;right:0;}
+.main_title.ez-align-right .main_title_txt01:before {margin-left:auto;margin-right:0;}
 
 /* 메인 상품진열 */
 .main_product_list {max-width:1480px !important;width:92%;margin:0 auto 120px;padding:0;}
@@ -72,7 +73,7 @@
 .main_product_slide.section_full .swiper-next-highlight_product {right:1%;}
 
 /* 메인 텍스트배너 */
-.main_text {max-width:1480px !important;width:92%;margin:0 auto 120px;padding:0;background:#faf7f3;}
+.main_text {max-width:1480px !important;width:92%;margin:0 auto 120px;padding:0;background:#F3EDE4;}
 .main_text .main_long_banner {width:100%;}
 .main_text .main_long_banner .main_long_banner_txt {padding:56px 45px;}
 .main_text .main_long_banner .main_long_banner_txt .main_long_banner_txt01 {font-size:24px;font-weight:500;color:#000;line-height:1;margin-bottom:25px;}
@@ -144,8 +145,8 @@
 @media all and (max-width:1480px) {
 	/* 메인 타이틀 */
 	.main_title {margin-bottom:30px;}
-	.main_title .main_title_txt01 {font-size:calc(23px + (30 - 23) * ((100vw - 370px) / (1480 - 370)));}
-	.main_title .main_title_txt02 {font-size:calc(13px + (14 - 13) * ((100vw - 370px) / (1480 - 370)));}
+	.main_title .main_title_txt01 {font-size:calc(22px + (28 - 22) * ((100vw - 370px) / (1480 - 370)));}
+	.main_title .main_title_txt02 {font-size:calc(12px + (13 - 12) * ((100vw - 370px) / (1480 - 370)));}
 
 	/*
 		font-size:calc([min size] + ([max size] - [min size]) * ((100vw - [min width]) / ([max width] - [min width])));
@@ -282,4 +283,178 @@
 	.main_map .main_map_banner .main_map_banner_txt_box {padding:8% 7%;}
 	.main_map .main_map_banner .main_map_banner_txt01 {line-height:30px;}
 	.main_map .main_map_banner .main_map_banner_txt_box .main_long_banner_link {margin-top: 30px;}
+
+	/* 히어로 배너 */
+	.hero_mowani {margin:0 0 50px;}
+	.hero_image_col {height:52vw;min-height:200px;}
+	.hero_text_col {padding:44px 4% 40px;}
+	.hero_headline {font-size:clamp(34px, 10vw, 48px);}
+	.hero_sub {margin-bottom:36px;}
+}
+
+/* =============================================
+   MOWANI 히어로 배너 — Fullbleed (Tigmi × Kar)
+============================================= */
+
+.hero_mowani {
+	position:relative;
+	width:100% !important;
+	max-width:100% !important;
+	height:100vh;
+	min-height:620px;
+	/* 배포 시: Cafe24 관리자 → 디자인 → 파일 첨부 업로드 후 아래 경로 교체 */
+	background-image:url('/SkinImg/img/hero_bg.jpg');
+	background-color:#F8F3EC;
+	background-size:cover;
+	background-position:center 40%;
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	justify-content:center;
+	overflow:hidden;
+	margin:0 0 100px;
+	padding:8vh 0 0;
+}
+
+/* 웜 샌드 오버레이 */
+.hero_mowani::before {
+	content:"";
+	position:absolute;
+	inset:0;
+	background:linear-gradient(
+		to bottom,
+		rgba(26, 20, 16, 0.08) 0%,
+		rgba(200, 180, 154, 0.12) 45%,
+		rgba(26, 20, 16, 0.42) 100%
+	);
+	pointer-events:none;
+}
+
+/* 로프 + 로고 — 오른쪽 상단 고정 */
+.hero_sign_wrap {
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	position:absolute;
+	top:0;
+	right:9%;
+	z-index:1;
+}
+
+.hero_sign_hanger {
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	transform-origin:top center;
+	animation:sign_sway 6s ease-in-out infinite;
+}
+
+.hero_rope {
+	width:1px;
+	height:180px;
+	background:linear-gradient(to bottom, transparent, rgba(200, 180, 154, 0.65));
+}
+
+.hero_sign_logo {
+	width:148px;
+	height:148px;
+	border-radius:50%;
+	overflow:hidden;
+	border:1px solid rgba(200, 180, 154, 0.45);
+	box-shadow:0 4px 32px rgba(26, 20, 16, 0.18);
+	transition:box-shadow 1.2s ease;
+}
+
+.hero_sign_logo img {
+	width:100%;
+	height:100%;
+	object-fit:cover;
+	display:block;
+}
+
+/* 카피 */
+.hero_copy {
+	text-align:center;
+	margin-top:0;
+	position:relative;
+	z-index:1;
+}
+
+.hero_eyebrow {
+	display:block;
+	font-family:'Jost', sans-serif;
+	font-size:10px;
+	font-weight:400;
+	letter-spacing:0.38em;
+	color:rgba(248, 243, 236, 0.72);
+	text-transform:uppercase;
+	margin-bottom:20px;
+}
+
+.hero_headline {
+	font-family:'Jost', sans-serif;
+	font-size:clamp(40px, 5vw, 68px);
+	font-weight:300;
+	letter-spacing:0.14em;
+	color:#F8F3EC;
+	margin:0 0 16px;
+	line-height:1;
+}
+
+.hero_sub {
+	font-size:13px;
+	font-weight:300;
+	color:rgba(248, 243, 236, 0.7);
+	letter-spacing:0.15em;
+	margin:0 0 44px;
+	line-height:1;
+}
+
+.hero_cta_btn {
+	display:inline-flex;
+	align-items:center;
+	gap:14px;
+	font-family:'Jost', sans-serif;
+	font-size:10px;
+	font-weight:400;
+	letter-spacing:0.35em;
+	color:rgba(248, 243, 236, 0.88);
+	text-decoration:none;
+	text-transform:uppercase;
+	transition:color 0.3s;
+}
+
+.hero_cta_btn::after {
+	content:'';
+	display:block;
+	width:32px;
+	height:1px;
+	background:rgba(200, 180, 154, 0.85);
+	transition:width 0.4s ease;
+	flex-shrink:0;
+}
+
+.hero_cta_btn:hover {color:#F8F3EC;}
+.hero_cta_btn:hover::after {width:56px;}
+
+/* 흔들림 애니메이션 */
+@keyframes sign_sway {
+	0%, 100% {transform:rotate(-1.2deg);}
+	50%       {transform:rotate(1.2deg);}
+}
+
+@media all and (max-width:1024px) {
+	.hero_mowani {margin:0 0 80px;padding:0 0 14vh;}
+	.hero_sign_wrap {right:5%;}
+	.hero_sign_logo {width:116px;height:116px;}
+	.hero_headline {font-size:clamp(34px, 6vw, 52px);}
+}
+
+@media all and (max-width:767px) {
+	.hero_mowani {margin:0 0 50px;padding:0 0 10vh;}
+	.hero_sign_wrap {right:4%;}
+	.hero_rope {height:60px;}
+	.hero_sign_logo {width:90px;height:90px;}
+	.hero_headline {font-size:clamp(30px, 9vw, 44px);}
+	.hero_sub {margin-bottom:32px;}
 }

@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MOWANI — 히어로 미리보기</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400&family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Noto Sans KR', sans-serif; background: #F8F3EC; }
+
+    /* ── Mock 헤더 ── */
+    .mock_header {
+      width: 100%;
+      height: 80px;
+      background: #fff;
+      border-bottom: 1px solid #EDE0D0;
+      display: flex;
+      align-items: center;
+      padding: 0 8%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 100;
+    }
+    .mock_logo {
+      font-family: 'Jost', sans-serif;
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: 0.24em;
+      color: #1A1410;
+    }
+    .mock_nav {
+      display: flex;
+      gap: 36px;
+      margin-left: 48px;
+    }
+    .mock_nav span {
+      font-family: 'Jost', sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      color: #1A1410;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+    }
+    .mock_nav span:hover { color: #C8B49A; }
+    .mock_util {
+      margin-left: auto;
+      display: flex;
+      gap: 20px;
+    }
+    .mock_util span {
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      color: #9A8D80;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+    }
+
+    /* ── 히어로 ── */
+    .hero_mowani {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 620px;
+      /* 로컬 테스트: assets 폴더 이미지 사용
+         Cafe24 배포 시 main.css의 background-image 경로를 교체 */
+      background-image: url('/assets/background.jpg');
+      background-color: #F8F3EC;
+      background-size: cover;
+      background-position: center 40%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 8vh 0 0;
+    }
+
+    /* 웜 샌드 오버레이 */
+    .hero_mowani::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(26, 20, 16, 0.08) 0%,
+        rgba(200, 180, 154, 0.12) 45%,
+        rgba(26, 20, 16, 0.42) 100%
+      );
+      pointer-events: none;
+    }
+
+    /* 로프 + 로고 */
+    .hero_sign_wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      right: 9%;
+      z-index: 1;
+    }
+
+    .hero_sign_hanger {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transform-origin: top center;
+      animation: sign_sway 6s ease-in-out infinite;
+    }
+
+    .hero_rope {
+      width: 1px;
+      height: 180px;
+      background: linear-gradient(to bottom, transparent, rgba(200, 180, 154, 0.65));
+    }
+
+    .hero_sign_logo {
+      width: 148px;
+      height: 148px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 1px solid rgba(200, 180, 154, 0.45);
+      box-shadow: 0 4px 32px rgba(26, 20, 16, 0.18);
+    }
+
+    .hero_sign_logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* 카피 */
+    .hero_copy {
+      text-align: center;
+      margin-top: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero_eyebrow {
+      display: block;
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.38em;
+      color: rgba(248, 243, 236, 0.72);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .hero_headline {
+      font-family: 'Jost', sans-serif;
+      font-size: clamp(40px, 5vw, 68px);
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      color: #F8F3EC;
+      margin: 0 0 16px;
+      line-height: 1;
+    }
+
+    .hero_sub {
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(248, 243, 236, 0.7);
+      letter-spacing: 0.15em;
+      margin: 0 0 44px;
+      line-height: 1;
+    }
+
+    .hero_cta_btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.35em;
+      color: rgba(248, 243, 236, 0.88);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .hero_cta_btn::after {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: rgba(200, 180, 154, 0.85);
+      transition: width 0.4s ease;
+    }
+
+    .hero_cta_btn:hover { color: #F8F3EC; }
+    .hero_cta_btn:hover::after { width: 56px; }
+
+    @keyframes sign_sway {
+      0%, 100% { transform: rotate(-1.2deg); }
+      50%       { transform: rotate(1.2deg); }
+    }
+
+    /* ── 아래 섹션 미리보기 ── */
+    .preview_sections {
+      max-width: 1480px;
+      width: 92%;
+      margin: 100px auto 0;
+      padding-bottom: 100px;
+    }
+
+    .main_title { margin-bottom: 48px; }
+    .main_title_txt01 {
+      font-family: 'Jost', sans-serif;
+      font-size: 28px;
+      font-weight: 300;
+      color: #1A1410;
+      letter-spacing: 0.04em;
+    }
+    .main_title_txt01::before {
+      content: "";
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: #d0ac88;
+      margin-bottom: 16px;
+    }
+    .main_title_txt02 {
+      font-size: 13px;
+      font-weight: 300;
+      color: #9A8D80;
+      margin-top: 10px;
+      letter-spacing: 0.05em;
+    }
+
+    .product_grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-bottom: 100px;
+    }
+
+    .product_card .thumb {
+      width: 100%;
+      aspect-ratio: 3/4;
+      margin-bottom: 14px;
+      background: linear-gradient(135deg, #EDE0D0, #D8C9B5);
+    }
+    .product_card:nth-child(2) .thumb { background: linear-gradient(135deg, #D8CCBC, #C8BAA8); }
+    .product_card:nth-child(3) .thumb { background: linear-gradient(135deg, #E4D8C8, #D0C0AA); }
+    .product_card:nth-child(4) .thumb { background: linear-gradient(135deg, #DDD0C0, #CCBCAA); }
+
+    .product_card .prd_name {
+      font-family: 'Jost', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      color: #1A1410;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+    }
+    .product_card .prd_price {
+      font-family: 'Jost', sans-serif;
+      font-size: 12px;
+      color: #9A8D80;
+      letter-spacing: 0.04em;
+    }
+
+    .text_banner {
+      background: #F3EDE4;
+      padding: 56px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .text_banner .txt {
+      font-family: 'Jost', sans-serif;
+      font-size: 22px;
+      font-weight: 300;
+      color: #1A1410;
+      letter-spacing: 0.04em;
+    }
+    .text_banner .link {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.32em;
+      color: #1A1410;
+      text-decoration: none;
+    }
+    .text_banner .link::after {
+      content: '';
+      width: 28px;
+      height: 1px;
+      background: #C8B49A;
+      display: block;
+    }
+
+    /* Preview label */
+    .preview_label {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(26,20,16,0.65);
+      color: rgba(248,243,236,0.7);
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      padding: 7px 14px;
+      pointer-events: none;
+    }
+
+    @media (max-width: 767px) {
+      .mock_nav { display: none; }
+      .product_grid { grid-template-columns: repeat(2, 1fr); }
+      .hero_sign_logo { width: 100px; height: 100px; }
+      .hero_rope { height: 70px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="mock_header">
+  <div class="mock_logo">MOWANI</div>
+  <nav class="mock_nav">
+    <span>Glassware</span>
+    <span>Tableware</span>
+    <span>Lifestyle</span>
+    <span>About</span>
+  </nav>
+  <div class="mock_util">
+    <span>Search</span>
+    <span>Cart</span>
+  </div>
+</header>
+
+<section class="hero_mowani">
+  <div class="hero_sign_wrap">
+    <div class="hero_sign_hanger">
+      <div class="hero_rope"></div>
+      <div class="hero_sign_logo">
+        <img src="/assets/mowani_logo-removebg-preview.png" alt="MOWANI">
+      </div>
+    </div>
+  </div>
+  <div class="hero_copy">
+    <span class="hero_eyebrow">Handcrafted Glassware</span>
+    <p class="hero_headline">Daily Light.</p>
+    <p class="hero_sub">일상을 담는 유리</p>
+    <a href="#" class="hero_cta_btn">SHOP NOW</a>
+  </div>
+</section>
+
+<div class="preview_sections">
+  <div class="main_title">
+    <div class="main_title_txt01">New Product</div>
+    <div class="main_title_txt02">새롭게 입고된 신상품들을 만나보세요</div>
+  </div>
+
+  <div class="product_grid">
+    <div class="product_card">
+      <div class="thumb"></div>
+      <div class="prd_name">Ripple Glass — Clear</div>
+      <div class="prd_price">₩ 38,000</div>
+    </div>
+    <div class="product_card">
+      <div class="thumb"></div>
+      <div class="prd_name">Curve Carafe — Amber</div>
+      <div class="prd_price">₩ 72,000</div>
+    </div>
+    <div class="product_card">
+      <div class="thumb"></div>
+      <div class="prd_name">Still Water Set</div>
+      <div class="prd_price">₩ 58,000</div>
+    </div>
+    <div class="product_card">
+      <div class="thumb"></div>
+      <div class="prd_name">Bloom Vase — Sand</div>
+      <div class="prd_price">₩ 54,000</div>
+    </div>
+  </div>
+
+  <div class="text_banner">
+    <span class="txt">우드톤 컬러로 완성하는 나만의 공간</span>
+    <a href="#" class="link">EXPLORE</a>
+  </div>
+</div>
+
+<div class="preview_label">LOCAL PREVIEW — MOWANI</div>
+
+</body>
+</html>
