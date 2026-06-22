@@ -306,7 +306,7 @@
 	background-image:url('/SkinImg/img/hero_bg.jpg');
 	background-color:#F8F3EC;
 	background-size:cover;
-	background-position:center 40%;
+	background-position:center bottom;
 	display:flex;
 	flex-direction:column;
 	align-items:center;
@@ -436,6 +436,37 @@
 
 .hero_cta_btn:hover {color:#F8F3EC;}
 .hero_cta_btn:hover::after {width:56px;}
+
+/* CTA 정렬 (커스터마이저 + SHOP NOW) */
+.hero_cta_row {
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	gap:26px;
+}
+
+/* 커스터마이저 버튼 — 샌드 채움(주요 CTA) → 호버 시 반전 */
+.hero_customizer_btn {
+	display:inline-flex;
+	align-items:center;
+	gap:12px;
+	padding:16px 40px;
+	font-family:'Jost', 'Noto Sans KR', sans-serif;
+	font-size:12px;
+	font-weight:400;
+	letter-spacing:0.18em;
+	color:#241c16;
+	background:#d0ac88;
+	border:1px solid #d0ac88;
+	border-radius:2px;
+	text-decoration:none;
+	transition:background 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+}
+.hero_customizer_btn:hover {
+	background:transparent;
+	color:#F8F3EC;
+	border-color:rgba(248, 243, 236, 0.7);
+}
 
 /* 흔들림 애니메이션 */
 @keyframes sign_sway {

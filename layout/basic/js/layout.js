@@ -44,11 +44,11 @@ function fixedHeader() { // 210804 서정환 수정
     var header = document.getElementById("header");
 	var fixed_margin = document.getElementById("contents");
 	var scrollY = window.pageYOffset || document.documentElement.scrollTop;
-	var header_height = document.getElementById("header").scrollHeight+'px';
 
 	if(scrollY > header.offsetTop) {
         header.classList.add("fixed");
-		fixed_margin.style.marginTop  = header_height;
+		// 고정 후 '실제로 보이는' 높이로 보정 (transform:translateY 반영 → 빈 틈 방지)
+		fixed_margin.style.marginTop  = Math.max(0, header.getBoundingClientRect().bottom) + 'px';
     } else {
         header.classList.remove("fixed");
 		fixed_margin.style.marginTop  = '0px';

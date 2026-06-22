@@ -1,7 +1,7 @@
 const handleConfig = {
     pink: {
         label: "Pink Handle",
-        imagePath: "assets/handle-pink.png",
+        imagePath: "/SkinImg/img/handle-pink.png",
         width: 433,
         top: 160,
         left: 64,
@@ -10,7 +10,7 @@ const handleConfig = {
     },
     yellow: {
         label: "Yellow Base",
-        imagePath: "assets/handle-yellow.png",
+        imagePath: "/SkinImg/img/handle-yellow.png",
         width: 375,
         top: 185,
         left: 92,
@@ -19,7 +19,7 @@ const handleConfig = {
     },
     black: {
         label: "Black Handle",
-        imagePath: "assets/handle-black.png",
+        imagePath: "/SkinImg/img/handle-black.png",
         width: 433,
         top: 160,
         left: 64,

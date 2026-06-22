@@ -105,3 +105,49 @@ background-image: url('/SkinImg/img/handle-black.png');
 - [ ] `data-ez-*`, `ec-data-*`, `module="..."` 속성이 제거되지 않았는가
 - [ ] 깨진 태그, 누락된 닫힘 태그가 없는가
 - [ ] 로컬 렌더링과 실제 Cafe24 적용 결과가 다를 수 있음을 인지했는가
+
+---
+
+## 7. 빌드 / 업로드 규칙 (작업 완료 시 반드시)
+
+이 프로젝트는 **현재 작업 디렉토리 = 업로드할 스킨의 정본**입니다.
+Cafe24에 올릴 때는 `base/` 래퍼로 감싼 `tar.gz`(디자인 보관함 복원 형식)로 묶어야 합니다.
+
+### 작업을 끝내면 항상 빌드 스크립트로 패키지를 만든다
+```bash
+bash __build-skin.sh
+```
+- 결과물: **`dist/{몰ID}_s2_{타임스탬프}_d_base_E.tar.gz`**
+- **절대 `~/Downloads` 같은 외부 경로에 만들지 않는다.** 항상 프로젝트 내부 `dist/`에 생성.
+- `dist/`는 `.gitignore`에 등록되어 있어 커밋되지 않는다.
+- 빌드할 때마다 **이전 빌드는 자동 삭제**되어 `dist/`엔 최신 1개만 남는다 → 그걸 올리면 됨.
+- 업로드: Cafe24 관리자 → 디자인(PRO) → 디자인 보관함 → **복원**에서 이 파일 선택.
+
+### 스킨 파일명 규칙 (Cafe24가 파일명으로 스킨을 식별)
+```
+{몰ID}_s2_{타임스탬프}_d_{스킨코드}_E.tar.gz
+mowanistudio_s2_<YYMMDDHHMMSS>_d_base_E
+```
+- **타임스탬프(`date +%y%m%d%H%M%S`)는 빌드마다 현재 시각으로 새로 생성된다.**
+  Cafe24가 타임스탬프로 각 업로드를 구분하므로 매번 달라야 충돌이 없다.
+- 고정부(`mowanistudio` / `s2` / `base` / `E`)는 이 몰·스킨 식별값이라 **임의 변경 금지** —
+  패턴이 깨지면 Cafe24가 "스킨 이름이 맞지 않다"며 거부한다.
+  (변경이 필요하면 `__build-skin.sh` 상단의 `MALL/SLOT/SKINCODE/SUFFIX` 값만 수정)
+
+### 빌드에서 자동 제외되는 로컬 전용 파일 (배포 대상 아님)
+| 항목 | 용도 |
+|------|------|
+| `assets/` | 원본 이미지 보관 (실제 참조는 `/SkinImg/img/`) |
+| `__*` (`__build-skin.sh`, `__preview-server.js`, `__localserver.js`) | 로컬 빌드/프리뷰 도구 |
+| `hero-preview.html` | 로컬 디자인 목업 |
+| `*.md` (`CLAUDE.md`, `AGENTS.md`) | 작업 규칙 문서 |
+| `dist/`, `node_modules/`, `.DS_Store` | 빌드 산출물/도구 |
+
+### 이미지를 새로 추가할 때
+`assets/`에만 두지 말고 **`SkinImg/img/`에 복사한 뒤 코드에서 `/SkinImg/img/...`로 참조**한다.
+(그래야 빌드에 포함되어 실서버에서 깨지지 않음 — 규칙 1 참조)
+
+### 로컬 시각 확인 (선택)
+```bash
+node __preview-server.js   # http://127.0.0.1:4173/ — 톤/색 확인용 (JS·실데이터 없음)
+```
