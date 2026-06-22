@@ -15,8 +15,15 @@
 			<a data-ez-item="recent" href="/product/recent_view_product.html">최근본상품</a>
         </div><!-- //navigation_state -->
 
-		<div data-ez-module="menu-side/1"><div id="slideCateList" class="navigation-menu__category">
-  <ul id="slide_add_category"><li><a href="/category/Tables/42/" class="view">Tables</a><ul class="sub_cate01"><li><a href="/category/Table-1/47/" class="view">Table 1</a></li><li><a href="/category/Table-2/48/" class="view">Table 2</a></li></ul></li><li><a href="/category/Bed-Frames/43/" class="view">Bed Frames</a></li><li><a href="/category/Sideboards/44/" class="view">Sideboards</a></li><li><a href="/category/Couches/45/" class="view">Couches</a></li><li><a href="/category/Furniture/46/" class="view">Furniture</a></li></ul>
+		<div data-ez-module="menu-side/1" data-ez-mode="auto"><div id="slideCateList" class="navigation-menu__category">
+  <ul id="slide_add_category" class="xans-element- xans-layout xans-layout-category">
+	<li class="xans-record-">
+		<a href="/product/list.html?cate_no={$category}" class="view">{$name}</a>
+		<ul class="sub_cate01 xans-element- xans-layout xans-layout-category">
+			<li class="xans-record-"><a href="/product/list.html?cate_no={$category}" class="view">{$name}</a></li>
+		</ul>
+	</li>
+  </ul>
   </div></div><!-- //menu-side/1 -->
 
         <div module="Layout_BoardInfo" class="navigation-menu__board">

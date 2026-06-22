@@ -67,9 +67,16 @@
 		<div class="top_nav_box" id="top_nav_box">
 			<div class="top_logo" module="Layout_LogoTop"><a href="/">{$mall_name}</a></div><!-- //top_logo -->
 
-			<div data-ez-module="menu-main/1" data-ez-mode="manual">
+			<div data-ez-module="menu-main/1" data-ez-mode="auto">
         <div class="xans-element- xans-layout xans-layout-category top_category">
-<ul><li><a href="/category/Tables/42/">Tables</a><ul class="sub_cate01"><li><a href="/category/Table-1/47/">Table 1</a></li><li><a href="/category/Table-2/48/">Table 2</a></li></ul></li><li><a href="/category/Bed-Frames/43/">Bed Frames</a></li><li><a href="/category/Sideboards/44/">Sideboards</a></li><li><a href="/category/Couches/45/">Couches</a></li><li><a href="/category/Furniture/46/">Furniture</a></li></ul>
+<ul>
+	<li class="xans-record-">
+		<a href="/product/list.html?cate_no={$category}">{$name}</a>
+		<ul class="sub_cate01 xans-element- xans-layout xans-layout-category">
+			<li class="xans-record-"><a href="/product/list.html?cate_no={$category}">{$name}</a></li>
+		</ul>
+	</li>
+</ul>
 </div>
       </div><!-- //menu-main/1 -->
 
